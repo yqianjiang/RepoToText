@@ -62,6 +62,7 @@ function App() {
   const [fileSelection, setFileSelection] = useState('all');
   const [customFileType, setCustomFileType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleRepoChange = (e) => {
     setRepoUrl(e.target.value);
@@ -110,6 +111,7 @@ function App() {
       });
       setResponse(result.data.response);
     } catch (error) {
+      setError(error?.message || '');
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -212,6 +214,15 @@ function App() {
           </button>
         </>}
       </div>
+
+      {error ? (
+        <div className="errorContainer">
+          <p>Error: {error}</p>
+        </div>
+      ) :
+        <div className="outputContainer">
+          <textarea value={response} readOnly className="outputArea" />
+        </div>}
     </div>
   );
 }
