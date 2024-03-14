@@ -61,6 +61,7 @@ function App() {
   const [selectedFileTypes, setSelectedFileTypes] = useState([]);
   const [fileSelection, setFileSelection] = useState('all');
   const [customFileType, setCustomFileType] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleRepoChange = (e) => {
     setRepoUrl(e.target.value);
@@ -94,6 +95,8 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
+
     let fileTypesToSend = selectedFileTypes;
     if (fileSelection === 'all') {
       fileTypesToSend = FILE_TYPES;
@@ -108,6 +111,8 @@ function App() {
       setResponse(result.data.response);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -115,6 +120,18 @@ function App() {
     const outputArea = document.querySelector('.outputArea');
     outputArea.select();
     document.execCommand('copy');
+  };
+
+  const handleDownload = () => {
+    const blob = new Blob([response], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = response.split('\n')[0].split('"')[1].split('/')[1] + '.txt';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -171,7 +188,7 @@ function App() {
                 placeholder="Enter new file type"
                 className="smallInputArea"
               />
-              <button onClick={handleAddFileType} className="addButton">
+              <button onClick={handleAddFileType} className="primaryButton addButton">
                 Add
               </button>
             </div>
@@ -179,15 +196,21 @@ function App() {
         )}
       </div>
       <div className="buttonContainer">
-        <button onClick={handleSubmit} className="transformButton">
-          Submit
-        </button>
-        <button onClick={handleCopyText} className="copyButton">
-          Copy Text
-        </button>
-      </div>
-      <div className="outputContainer">
-        <textarea value={response} readOnly className="outputArea" />
+        {isLoading ? (
+          <div className="loadingIndicator">
+            <p>Loading...</p>
+          </div>
+        ) : <>
+          <button onClick={handleSubmit} className="primaryButton transformButton">
+            Submit
+          </button>
+          <button onClick={handleCopyText} className="primaryButton copyButton">
+            Copy Text
+          </button>
+          <button onClick={handleDownload} className="primaryButton">
+            Download .txt
+          </button>
+        </>}
       </div>
     </div>
   );
