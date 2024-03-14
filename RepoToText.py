@@ -19,8 +19,10 @@ from retry import retry
 app = Flask(__name__)
 CORS(app)
 
+
 class GithubRepoScraper:
     """Scrape GitHub repositories."""
+
     def __init__(self, repo_name, doc_link=None, selected_file_types=None):
         if selected_file_types is None:
             selected_file_types = []
@@ -36,7 +38,8 @@ class GithubRepoScraper:
             files_data = []
             for content_file in contents:
                 if content_file.type == "dir":
-                    files_data += recursive_fetch_files(repo, repo.get_contents(content_file.path))
+                    files_data += recursive_fetch_files(
+                        repo, repo.get_contents(content_file.path))
                 else:
                     # Check if file type is in selected file types
                     if any(content_file.name.endswith(file_type) for file_type in self.selected_file_types):
@@ -45,16 +48,19 @@ class GithubRepoScraper:
 
                         if content_file.encoding == "base64":
                             try:
-                                file_content += content_file.decoded_content.decode("utf-8")
-                            except UnicodeDecodeError: # catch decoding errors
+                                file_content += content_file.decoded_content.decode(
+                                    "utf-8")
+                            except UnicodeDecodeError:  # catch decoding errors
                                 file_content += "[Content not decodable]"
                         elif content_file.encoding == "none":
                             # Handle files with encoding "none" here
-                            print(f"Warning: Skipping {content_file.path} due to unsupported encoding 'none'.")
+                            print(
+                                f"Warning: Skipping {content_file.path} due to unsupported encoding 'none'.")
                             continue
                         else:
                             # Handle other unexpected encodings here
-                            print(f"Warning: Skipping {content_file.path} due to unexpected encoding '{content_file.encoding}'.")
+                            print(
+                                f"Warning: Skipping {content_file.path} due to unexpected encoding '{content_file.encoding}'.")
                             continue
 
                         file_content += "\n'''"
@@ -115,6 +121,7 @@ class GithubRepoScraper:
         print("Done.")
         return filename
 
+
 @app.route('/scrape', methods=['POST'])
 def scrape():
     """Scrape GitHub repositories."""
@@ -137,8 +144,9 @@ def scrape():
 
     return jsonify({"response": file_content})
 
-if __name__ == "__main__": # -- UNCOMMENT TO RUN WITH DOCKER
+
+if __name__ == "__main__":  # -- UNCOMMENT TO RUN WITH DOCKER
     app.run(host='0.0.0.0')
 
 # if __name__ == "__main__": -- UNCOMMENT TO RUN LOCALLY WITHOUT DOCKER
-#     app.run(port=5000)
+#     app.run(port=5280)

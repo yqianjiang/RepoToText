@@ -12,7 +12,7 @@ COPY ./requirements.txt /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose the port for the server
-EXPOSE 5000
+EXPOSE 5280
 
 # Start the server
 CMD ["python", "RepoToText.py"]
