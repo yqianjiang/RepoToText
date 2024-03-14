@@ -98,6 +98,7 @@ function App() {
     e.preventDefault();
 
     setIsLoading(true);
+    setError('');
 
     let fileTypesToSend = selectedFileTypes;
     if (fileSelection === 'all') {
@@ -130,7 +131,8 @@ function App() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = response.split('\n')[0].split('"')[1].split('/')[1] + '.txt';
+    link.download =
+      response.split('\n')[0].split('"')[1].split('/')[1] + '.txt';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -191,7 +193,10 @@ function App() {
                 placeholder="Enter new file type"
                 className="smallInputArea"
               />
-              <button onClick={handleAddFileType} className="primaryButton addButton">
+              <button
+                onClick={handleAddFileType}
+                className="primaryButton addButton"
+              >
                 Add
               </button>
             </div>
@@ -203,27 +208,36 @@ function App() {
           <div className="loadingIndicator">
             <p>Loading...</p>
           </div>
-        ) : <>
-          <button onClick={handleSubmit} className="primaryButton transformButton">
-            Submit
-          </button>
-          <button onClick={handleCopyText} className="primaryButton copyButton">
-            Copy Text
-          </button>
-          <button onClick={handleDownload} className="primaryButton">
-            Download .txt
-          </button>
-        </>}
+        ) : (
+          <>
+            <button
+              onClick={handleSubmit}
+              className="primaryButton transformButton"
+            >
+              Submit
+            </button>
+            <button
+              onClick={handleCopyText}
+              className="primaryButton copyButton"
+            >
+              Copy Text
+            </button>
+            <button onClick={handleDownload} className="primaryButton">
+              Download .txt
+            </button>
+          </>
+        )}
       </div>
 
       {error ? (
         <div className="errorContainer">
           <p>Error: {error}</p>
         </div>
-      ) :
+      ) : (
         <div className="outputContainer">
           <textarea value={response} readOnly className="outputArea" />
-        </div>}
+        </div>
+      )}
     </div>
   );
 }
