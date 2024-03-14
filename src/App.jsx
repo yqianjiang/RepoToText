@@ -63,6 +63,7 @@ function App() {
   const [customFileType, setCustomFileType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
 
   const handleRepoChange = (e) => {
     setRepoUrl(e.target.value);
@@ -104,7 +105,7 @@ function App() {
     }
 
     try {
-      const result = await axios.post('http://localhost:5280/scrape', {
+      const result = await axios.post(`${apiUrl}/scrape`, {
         repoUrl,
         docUrl,
         selectedFileTypes: fileTypesToSend,
