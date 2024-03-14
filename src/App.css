@@ -15,6 +15,14 @@
   width: 100%;
 }
 
+.errorContainer {
+  margin-top: 20px;
+  color: red;
+  border: 1px solid red;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 .inputArea,
 .smallInputArea {
   height: auto;
@@ -82,8 +90,7 @@
   gap: 10px;
 }
 
-.transformButton,
-.addButton {
+.primaryButton {
   font-size: 1em;
   padding: 10px 20px;
   border-radius: 5px;
@@ -94,8 +101,7 @@
   transition: background-color 0.3s ease;
 }
 
-.transformButton:hover,
-.addButton:hover {
+.primaryButton:hover {
   background-color: #0056b3;
 }
 
@@ -104,17 +110,13 @@
   font-size: 0.85em;
 }
 
-.copyButton {
-  font-size: 1em;
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  color: white;
-  background-color: #007bff;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.loadingIndicator {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
-.copyButton:hover {
-  background-color: #0056b3;
+.loadingIndicator p {
+  font-size: 1em;
+  color: #007bff;
 }
