@@ -23,7 +23,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-EXPOSE 3000
+EXPOSE 4137
 
 # 配置 Vite 服务器
 CMD ["yarn", "dev"]

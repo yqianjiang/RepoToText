@@ -10,11 +10,19 @@ services:
       - 5280:5000
     env_file:
       - .env
+    networks:
+      - game-backend
   frontend:
     build:
       context: .
       dockerfile: Dockerfile.frontend
     ports:
-      - 3000:3000
+      - 4137:3000
     env_file:
       - .env
+    networks:
+      - game-backend
+
+networks:
+  game-backend:
+    external: true
