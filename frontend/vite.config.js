@@ -7,6 +7,9 @@ export default defineConfig({
     react(),
   ],
   server: {
-    port: 3000, // 或你希望使用的其他端口
+    port: 4137,
   },
+  preview: {
+    port: 4137,
+  }
 });

@@ -15,7 +15,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "serve": "vite preview",
+    "start": "vite preview",
     "fix": "eslint --fix .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",

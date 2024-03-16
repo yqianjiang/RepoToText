@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pygithub
+beautifulsoup4
+requests
+retry
+python-multipart
+pydantic
