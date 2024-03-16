@@ -13,8 +13,7 @@ app = FastAPI()
 
 # 配置 CORS
 origins = [
-    "http://localhost:4137",  # 替换为你的 React 应用的地址
-    # 如果需要,可以添加其他允许的来源
+    "*",
 ]
 
 app.add_middleware(
