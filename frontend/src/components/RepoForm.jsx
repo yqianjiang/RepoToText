@@ -26,7 +26,7 @@ function RepoForm() {
     setError('');
 
     try {
-      const result = await axios.post(`${apiUrl}/scrape_github_by_clone`, {
+      const result = await axios.post(`${apiUrl}/scrape`, {
         repoUrl,
         docUrl,
         selectedFileTypes,
