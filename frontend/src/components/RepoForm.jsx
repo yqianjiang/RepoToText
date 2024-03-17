@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import FileSelection from './FileSelection';
+import './RepoForm.css';
 
 function RepoForm() {
   const [selectedFileTypes, setSelectedFileTypes] = useState([]);
@@ -81,7 +82,7 @@ function RepoForm() {
       <div className="buttonContainer">
         {isLoading ? (
           <div className="loadingIndicator">
-            <p>Loading...</p>
+            <p>Processing...please wait a moment</p>
           </div>
         ) : (
           <>
@@ -89,30 +90,35 @@ function RepoForm() {
               onClick={handleSubmit}
               className="primaryButton transformButton"
             >
-              Submit
+              Convert to Text
             </button>
-            <button
-              onClick={handleCopyText}
-              className="primaryButton copyButton"
-            >
-              Copy Text
-            </button>
-            <button onClick={handleDownload} className="primaryButton">
-              Download .txt
-            </button>
+            {response ? (
+              <>
+                <button
+                  onClick={handleCopyText}
+                  className="primaryButton copyButton"
+                >
+                  Copy Text
+                </button>
+                <button onClick={handleDownload} className="primaryButton">
+                  Download Text File
+                </button>
+              </>
+            ) : (
+              ''
+            )}
           </>
         )}
       </div>
 
-      {error ? (
-        <div className="errorContainer">
-          <p>Error: {error}</p>
-        </div>
-      ) : (
-        <div className="outputContainer">
+      <div className="outputContainer">
+        <div>Conversion result:</div>
+        {error ? (
+          <p className="errorText">Error: {error}</p>
+        ) : (
           <textarea value={response} readOnly className="outputArea" />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

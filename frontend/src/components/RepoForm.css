@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
-  padding: 20px;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
@@ -14,13 +12,12 @@
   flex-direction: column;
   width: 100%;
 }
-
-.errorContainer {
-  margin-top: 20px;
+.outputContainer {
+  margin: 20px 0;
+}
+.errorText {
   color: red;
-  border: 1px solid red;
-  padding: 10px;
-  border-radius: 5px;
+  font-size: 1em;
 }
 
 .inputArea,
@@ -41,41 +38,10 @@
   font-size: 0.85em;
   margin-right: 10px;
 }
-.fileSelectionContainer {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin: 10px 0;
-}
-
-.fileSelectionContainer div {
-  display: flex;
-  align-items: center;
-}
-
-.fileSelectionContainer label {
-  margin-left: 5px;
-}
-
-.fileTypesContainer {
-  margin-top: 10px;
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 1px;
-  margin-bottom: 20px;
-}
-
-.fileTypesContainer div {
-  display: flex;
-  align-items: center;
-}
-
-.fileTypesContainer label {
-  margin-left: 5px;
-}
 
 .outputArea {
-  height: 50vh;
+  min-height: 200px;
+  max-height: 50vh;
   margin: 10px 0;
   padding: 20px;
   box-sizing: border-box;
@@ -85,6 +51,7 @@
 }
 
 .buttonContainer {
+  margin: 10px 0;
   display: flex;
   align-items: flex-start;
   gap: 10px;

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Github2Txt",
+  "name": "GitHub Code to Text Converter",
   "icons": [
     {
       "src": "favicon.ico",

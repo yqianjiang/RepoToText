@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './FileSelection.css';
 
 export const defaultFileTypes = [
   '.txt',
@@ -88,7 +89,7 @@ const FileSelection = ({ selectedFileTypes, setSelectedFileTypes }) => {
   return (
     <>
       <div className="fileSelectionContainer">
-        <label>Included File Type: </label>
+        <span>Included File Type: </span>
         <div>
           <input
             type="radio"
